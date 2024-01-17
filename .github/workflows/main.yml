@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  DITA_OT_VERSION: 4.1.2
+  JAVA_VERSION: 17
+  PLUGIN_NAME: com.github.damianoneill.json
+
+jobs:
+
+  dita-ot:
+    runs-on: ubuntu-latest
+    env:
+        PLUGIN_VERSION: ${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Java ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: $JAVA_VERSION
+          distribution: 'zulu'
+      - name: DITA-OT plugin install
+        run: |
+          curl --location --remote-name https://github.com/dita-ot/dita-ot/releases/download/$DITA_OT_VERSION/dita-ot-$DITA_OT_VERSION.zip
+          unzip dita-ot-$DITA_OT_VERSION
+          chmod +x dita-ot-$DITA_OT_VERSION/bin/dita
+          chmod +x dita-ot-$DITA_OT_VERSION/bin/ant
+          zip -qq -r $PLUGIN_NAME.zip . -x ./.git/**\*
+          dita-ot-$DITA_OT_VERSION/bin/dita install $PLUGIN_NAME.zip --force
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: $PLUGIN_NAME-$PLUGIN_VERSION
+          path: |
+            $DITA_OT_VERSION
+            !$DITA_OT_VERSION/**/*.html
+            !$DITA_OT_VERSION/**/*.js
+            !$DITA_OT_VERSION/**/*.css
