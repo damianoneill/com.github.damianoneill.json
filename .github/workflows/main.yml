@@ -34,7 +34,7 @@ jobs:
           zip -qq -r $PLUGIN_NAME.zip . -x ./.git/**\*
           dita-ot-$DITA_OT_VERSION/bin/dita install $PLUGIN_NAME.zip --force
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: $PLUGIN_NAME-$PLUGIN_VERSION
           path: |
