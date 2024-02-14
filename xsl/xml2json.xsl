@@ -13,7 +13,7 @@
   <xsl:template match="/extracts">
 	  <xsl:text>{
 	"extracts": [
-  </xsl:text>	  
+  </xsl:text>
     <xsl:for-each select="extract">
       <xsl:if test="position()&gt;1">
         <xsl:text>,</xsl:text>
@@ -32,28 +32,6 @@
     </xsl:for-each>
     <xsl:text>]
     }
-</xsl:text>	  
-  </xsl:template>
-
-
-  <!--  <xsl:template match="*[contains(@class,' topic/topic ')]/*[contains(@class,' topic/title ')]">
-    <xsl:text>
-"title": "</xsl:text><xsl:apply-templates/><xsl:text>",
 </xsl:text>
   </xsl:template>
-
-  <xsl:template match="*[contains(@class,' topic/linktext ')]">
-    <xsl:text>
-RELATED LINK: </xsl:text><xsl:apply-templates/><xsl:text> </xsl:text>
-  </xsl:template>
-
-  <xsl:template match="*[contains(@class,' topic/author ')]">
-  </xsl:template>
-
-  <xsl:template match="*[contains(@class,' topic/body ')]">
-    <xsl:text>
-"body": "</xsl:text><xsl:apply-templates/><xsl:text>"
-</xsl:text>
-  </xsl:template> -->
 </xsl:stylesheet>
-
