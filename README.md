@@ -17,3 +17,9 @@ dita --install https://github.com/damianoneill/com.github.damianoneill.json/arch
 ```
 
 This command will fetch the plugin from the specified URL and integrate it into your DITA-OT environment.
+
+After installing the plugin, a new transformation type called `json` will be available for use.
+
+```bash
+dita --input=path/to/input.ditamap --format=json
+```
