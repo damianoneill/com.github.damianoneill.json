@@ -28,6 +28,17 @@ dita --input=path/to/input.ditamap --format=json
 
 This command will transform the input DITA map to JSON format.
 
+This will produce a JSON file with the following object structure:
+
+```json
+{
+  "type": "concept",
+  "oid": "verification406",
+  "title": "Verification",
+  "text": "<p><p>Verifying Destination NAT Rule ...",
+}
+```
+
 ## Troubleshooting
 
 If you have dita files that contain the `<?workdir?>` processing instruction, and the links are not resolvable, you will need to remove these before transforming to JSON. You can do this using the following command:
