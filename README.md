@@ -18,8 +18,20 @@ dita --install https://github.com/damianoneill/com.github.damianoneill.json/arch
 
 This command will fetch the plugin from the specified URL and integrate it into your DITA-OT environment.
 
+## Usage
+
 After installing the plugin, a new transformation type called `json` will be available for use.
 
 ```bash
 dita --input=path/to/input.ditamap --format=json
+```
+
+This command will transform the input DITA map to JSON format.
+
+## Troubleshooting
+
+If you have dita files that contain the `<?workdir?>` processing instruction, and the links are not resolvable, you will need to remove these before transforming to JSON. You can do this using the following command:
+
+```bash
+find ./ -name "*.ditamap" -o -name "*.dita" | xargs sed -i '' 's/<?workdir[^>]*>//g'
 ```
